@@ -1,0 +1,15 @@
+[project]
+name = "url-shortener"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+]
+
+[tool.uv]
+dev-dependencies = [
+    "logging>=0.4.9.6",
+    "pytest>=8.4.0",
+    "ruff>=0.11.13",
+]
