@@ -2,7 +2,7 @@ install:
 	curl -LsSf https://astral.sh/uv/install.sh | sh
 
 lint:
-	uv run ruff format products_assistent && uv run ruff check products_assistent
+	uv run ruff format url_shortener && uv run ruff check url_shortener
 
 commit_lint:
-	uv run ruff format products_assistent --check && uv run ruff check products_assistent --exit-non-zero-on-fix
+	uv run ruff format url_shortener --check && uv run ruff check url_shortener --exit-non-zero-on-fix
