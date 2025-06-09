@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}home{% endblock %}
+{% block content %}
+<div class="container-lg mt-3">
+  <div class="row">
+    <div class="col-12 col-md-10 col-lg-8 mx-auto border rounded-3 bg-light p-5">
+      <h1 class="display-3">Сокращатель URL</h1>
+      <p class="lead">Сократите ссылки на сайты</p>
+      <form method="post" class="d-flex justify-content-center">
+        <label for="text" class="visually-hidden">Продукт для поиска</label>
+        <input type="text" name="product_req" placeholder="введите url" value="" class="form-control form-control-lg" required>
+        <input type="submit" class="btn btn-primary  btn-lg ms-3 px-5 text-uppercase mx-3" value="Найти">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

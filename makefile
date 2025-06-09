@@ -6,3 +6,6 @@ lint:
 
 commit_lint:
 	uv run ruff format url_shortener --check && uv run ruff check url_shortener --exit-non-zero-on-fix
+
+run:
+	uv run url_shortener/main.py
