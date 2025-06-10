@@ -7,18 +7,16 @@ logger = logging.getLogger(__name__)
 
 
 @aiohttp_jinja2.template("home.html")
-async def home_get(request):
+async def home(request):
+    if request.method == "POST":
+        data = await request.post()
+        user_url = data["user_url"]
+
+        is_cor_url = await validate_url(user_url)
+        if not is_cor_url:
+            return {"bad_url": True}
+
+        logger.info(f"user_url: {user_url}")
+        return {"new_url": "http//:localhost:8080/urls/"}
+
     return {}
-
-
-@aiohttp_jinja2.template("home.html")
-async def home_post(request):
-    data = await request.post()
-    user_url = data["user_url"]
-
-    is_cor_url = await validate_url(user_url)
-    if not is_cor_url:
-        return {"bad_url": True}
-
-    logger.info(f"user_url: {user_url}")
-    return {"new_url": "http//:localhost:8080/urls/"}
