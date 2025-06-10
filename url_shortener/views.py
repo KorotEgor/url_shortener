@@ -14,4 +14,4 @@ async def home_post(request):
     data = await request.post()
     user_url = data["user_url"]
     logger.info(f"user_url: {user_url}")
-    return {}
+    return {"new_url": "http//:localhost:8080/urls/"}
