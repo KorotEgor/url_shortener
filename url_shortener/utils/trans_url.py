@@ -8,7 +8,7 @@ class TransUrl:
         self.url_chars = (
             "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         )
-        self.last_coomb = "http://localhost:8080/"
+        self.last_coomb = "http://localhost:8080/urls/"
         self.last_ch_num = 1
         self.last_added_ch_num = 0
 

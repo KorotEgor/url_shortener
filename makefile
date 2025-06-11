@@ -9,3 +9,6 @@ commit_lint:
 
 run:
 	uv run url_shortener/main.py
+
+init_db:
+	uv run python3 /home/kor_egor/url_shortener/url_shortener/db/init_db.py

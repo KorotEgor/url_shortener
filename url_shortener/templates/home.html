@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block title %}home{% endblock %}
 {% block content %}
-{% if bad_url %}
-  <div class="alert alert-danger" role="alert">
-    Вы ввели некорректный url
+{% if flashed_message %}
+  <div class="alert {{ message_status }}" role="alert">
+    {{ flashed_message }}
   </div>
 {% endif %}
 <div class="container-lg mt-3">

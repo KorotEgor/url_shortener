@@ -3,10 +3,14 @@ import aiohttp_jinja2
 import jinja2
 import logging
 
+
 from url_shortener.routes import setup_routes
 from settings import BASE_DIR
 
+
 logging.basicConfig(level=logging.INFO)
+
+# app engine
 app = web.Application()
 aiohttp_jinja2.setup(
     app,

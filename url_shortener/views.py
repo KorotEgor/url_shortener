@@ -4,6 +4,10 @@ from aiohttp import web
 
 from url_shortener.utils.validator import validate_url
 from url_shortener.utils.trans_url import TransUrl
+from url_shortener.db.urls_repo import UrlsRepo
+from url_shortener.db.init_db import db_engine
+
+urls_repo = UrlsRepo(db_engine)
 
 tr_url = TransUrl()
 
@@ -19,23 +23,43 @@ async def home(request):
 
         is_cor_url = await validate_url(user_url)
         if not is_cor_url:
-            return {"bad_url": True}
+            return {
+                "flashed_message": "Введен не корректный url",
+                "message_status": "alert-danger",
+            }
 
         new_url = await tr_url.get_short_url()
-        return {"new_url": new_url}
+
+        is_good = await urls_repo.compare_urls(user_url, new_url)
+        if not is_good:
+            return {
+                "flashed_message": "Не удалось создать новый url",
+                "message_status": "alert-danger",
+            }
+
+        return {
+            "flashed_message": "Короткий url успешно создан",
+            "message_status": "alert-success",
+            "new_url": new_url,
+        }
 
     return {}
 
 
 @aiohttp_jinja2.template("urls.html")
 async def urls(request):
-    url = request.match_info.get("url", "bad_url")
-    logger.info(f"url: {url}")
+    short_url = "http://localhost:8080/urls/" + request.match_info.get(
+        "url", "bad_url"
+    )
 
-    # достаем из базы соотв url
-    redirect_url = "https://docs.aiohttp.org/en/stable/web_quickstart.html"
+    user_url = await urls_repo.get_user_by_short(short_url)
 
-    if redirect_url is None:
-        redirect_url = "http//:localhost:8080/"
+    if user_url is None:
+        user_url = "http://localhost:8080/bad_url"
 
-    raise web.HTTPFound(redirect_url)
+    raise web.HTTPFound(user_url)
+
+
+@aiohttp_jinja2.template("bad_url.html")
+async def bad_url(request):
+    return {}
