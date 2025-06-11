@@ -2,8 +2,8 @@ import aiohttp_jinja2
 import logging
 from aiohttp import web
 
-from url_shortener.validator import validate_url
-from url_shortener.trans_url import TransUrl
+from url_shortener.utils.validator import validate_url
+from url_shortener.utils.trans_url import TransUrl
 
 tr_url = TransUrl()
 
