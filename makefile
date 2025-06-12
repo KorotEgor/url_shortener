@@ -12,3 +12,8 @@ run:
 
 init_db:
 	uv run python3 /home/kor_egor/url_shortener/url_shortener/db/init_db.py
+
+test:
+	uv run pytest --cov=url_shortener --asyncio-mode=auto
+
+for_commit: lint test

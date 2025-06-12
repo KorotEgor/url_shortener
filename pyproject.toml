@@ -13,6 +13,8 @@ dependencies = [
 [tool.uv]
 dev-dependencies = [
     "logging>=0.4.9.6",
+    "pytest-aiohttp>=1.1.0",
+    "pytest-cov>=6.2.0",
     "pytest>=8.4.0",
     "ruff>=0.11.13",
 ]
@@ -20,3 +22,13 @@ dev-dependencies = [
 [tool.ruff]
 line-length = 80
 fix = true
+
+[tool.pytest.ini_options]
+addopts = "--cov-report=term-missing --setup-show --verbose"
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = ["if __name__ == .__main__.:"]
+omit = ["*/tests/*"]
