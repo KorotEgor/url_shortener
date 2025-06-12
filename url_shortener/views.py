@@ -5,9 +5,9 @@ from aiohttp import web
 from url_shortener.utils.validator import validate_url
 from url_shortener.utils.trans_url import TransUrl
 from url_shortener.db.urls_repo import UrlsRepo
-from url_shortener.db.init_db import db_engine
+from url_shortener.db.conn_to_db import init_db
 
-urls_repo = UrlsRepo(db_engine)
+urls_repo = UrlsRepo(init_db())
 
 tr_url = TransUrl()
 

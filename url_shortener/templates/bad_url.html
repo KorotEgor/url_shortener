@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% block title %}home{% endblock %}
 {% block content %}
-<div class="text-center"></div>
-  <img src="..." class="rounded" alt="...">
+<div class="text-center">
+  <img src="https://i.pinimg.com/736x/6d/a8/e6/6da8e6d1456bfb1345cfaedf4690448e.jpg" class="rounded text-center">
   <p class="h1">Похоже этот url не привязан к другому сайту</p>
-  <p class="lead text-center">
+  <p class="lead">
     Вы можете сократить нужный вам url на главной странице
   </p>
-  <button type="button" class="btn btn-primary">Вернуться на главную</button>
+  <button type="button" class="btn btn-primary">
+    <a href="http://localhost:8080/" class="link-light text-decoration-none">Вернуться на главную</a>
+  </button>
 </div>
 {% endblock %}
