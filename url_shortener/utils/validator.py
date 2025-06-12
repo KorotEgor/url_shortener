@@ -1,11 +1,7 @@
 import logging
-from pydantic import BaseModel, HttpUrl, ValidationError
+from pydantic import HttpUrl, ValidationError
 
 logger = logging.getLogger(__name__)
-
-
-class MyModel(BaseModel):
-    url: HttpUrl
 
 
 async def validate_url(url):
