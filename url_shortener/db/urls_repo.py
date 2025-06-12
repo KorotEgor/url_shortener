@@ -35,6 +35,23 @@ class UrlsRepo:
 
         if user_url is not None:
             user_url = user_url[0]
+            logger.info(f"Found user_url {user_url} by short_url {short_url}")
 
-        logger.info(f"Found user_url {user_url} by short_url {short_url}")
         return user_url
+
+    async def get_short_by_user(self, user_url):
+        try:
+            cur = self.db.execute(
+                "SELECT short_url FROM urls WHERE user_url = ?",
+                (user_url,),
+            )
+            short_url = cur.fetchone()
+        except DatabaseError as err:
+            logger.error(f"Error while getting short_url by user_url: {err}")
+            return None
+
+        if short_url is not None:
+            short_url = short_url[0]
+            logger.info(f"Found short_url {short_url} by user_url {user_url}")
+
+        return short_url

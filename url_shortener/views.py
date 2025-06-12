@@ -28,6 +28,14 @@ async def home(request):
                 "message_status": "alert-danger",
             }
 
+        short_url = await urls_repo.get_short_by_user(user_url)
+        if short_url is not None:
+            return {
+                "flashed_message": "Короткий url успешно создан",
+                "message_status": "alert-success",
+                "new_url": short_url,
+            }
+
         new_url = await tr_url.get_short_url()
 
         is_good = await urls_repo.compare_urls(user_url, new_url)
