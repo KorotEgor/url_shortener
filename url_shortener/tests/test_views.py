@@ -39,11 +39,11 @@ async def cli(aiohttp_client):
         ]
     )
     aiohttp_jinja2.setup(
-    app,
-    loader=jinja2.FileSystemLoader(
-        str(BASE_DIR / "url_shortener" / "tests" / "fixtures")
-    ),
-)
+        app,
+        loader=jinja2.FileSystemLoader(
+            str(BASE_DIR / "url_shortener" / "tests" / "fixtures")
+        ),
+    )
     return await aiohttp_client(app)
 
 
@@ -57,19 +57,25 @@ async def test_home(cli):
         text = await resp.read()
         assert text == f.read()
 
-    resp = await cli.post("/", data={"user_url": "http://localhost:8080/user_url"})
+    resp = await cli.post(
+        "/", data={"user_url": "http://localhost:8080/user_url"}
+    )
     assert resp.status == 200
     with open("url_shortener/tests/fixtures/home_url_created.html", "rb") as f:
         text = await resp.read()
         assert text == f.read()
 
-    resp = await cli.post("/", data={"user_url": "http://localhost:8080/user_url"})
+    resp = await cli.post(
+        "/", data={"user_url": "http://localhost:8080/user_url"}
+    )
     assert resp.status == 200
     with open("url_shortener/tests/fixtures/home_error.html", "rb") as f:
         text = await resp.read()
         assert text == f.read()
 
-    resp = await cli.post("/", data={"user_url": "http://localhost:8080/another_user_url"})
+    resp = await cli.post(
+        "/", data={"user_url": "http://localhost:8080/another_user_url"}
+    )
     assert resp.status == 200
     with open("url_shortener/tests/fixtures/home_url_created.html", "rb") as f:
         text = await resp.read()
