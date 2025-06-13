@@ -6,6 +6,7 @@ import logging
 
 from url_shortener.routes import setup_routes
 from settings import BASE_DIR
+from url_shortener.middlewares import setup_error_middleware
 
 
 logging.basicConfig(level=logging.INFO)
@@ -19,6 +20,7 @@ aiohttp_jinja2.setup(
     ),
 )
 setup_routes(app)
+setup_error_middleware(app)
 
 if __name__ == "__main__":
     web.run_app(app)

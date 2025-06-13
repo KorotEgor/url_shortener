@@ -4,10 +4,9 @@ from aiohttp import web
 
 from url_shortener.utils.validator import validate_url
 from url_shortener.utils.trans_url import TransUrl
-from url_shortener.db.urls_repo import UrlsRepo
 from url_shortener.db.conn_to_db import init_db
 
-urls_repo = UrlsRepo(init_db())
+urls_repo = init_db()
 
 tr_url = TransUrl()
 
@@ -68,6 +67,10 @@ async def urls(request):
     raise web.HTTPFound(user_url)
 
 
-@aiohttp_jinja2.template("bad_url.html")
+@aiohttp_jinja2.template("error_page.html")
 async def bad_url(request):
-    return {}
+    return {
+        "image": "https://i.pinimg.com/736x/6d/a8/e6/6da8e6d1456bfb1345cfaedf4690448e.jpg",
+        "h1": "Похоже этот url не привязан к другому сайту",
+        "lead": "Вы можете сократить нужный вам url на главной странице",
+    }
