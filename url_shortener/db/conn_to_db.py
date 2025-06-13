@@ -16,5 +16,5 @@ def init_db(path="url_shortener.db"):
     return con
 
 
-def get_db():
+def get_urls_repo():
     return UrlsRepo(init_db())

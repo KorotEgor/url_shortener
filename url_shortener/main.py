@@ -5,7 +5,7 @@ import logging
 
 
 from url_shortener.routes import setup_routes
-from settings import BASE_DIR
+from url_shortener.settings import BASE_DIR
 from url_shortener.middlewares import setup_error_middleware
 
 
