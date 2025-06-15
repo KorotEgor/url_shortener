@@ -4,23 +4,39 @@ import jinja2
 import logging
 
 
-from url_shortener.routes import setup_routes
 from url_shortener.settings import BASE_DIR
 from url_shortener.middlewares import setup_error_middleware
+from url_shortener.views import Views
+from url_shortener.db.conn_to_db import get_urls_repo
+from url_shortener.utils.trans_url import TransUrl
 
 
 logging.basicConfig(level=logging.INFO)
 
 # app engine
-app = web.Application()
-aiohttp_jinja2.setup(
-    app,
-    loader=jinja2.FileSystemLoader(
-        str(BASE_DIR / "url_shortener" / "templates")
-    ),
-)
-setup_routes(app)
-setup_error_middleware(app)
+# Лучше сделать функцию
+def run():
+    app = web.Application()
+    aiohttp_jinja2.setup(
+        app,
+        loader=jinja2.FileSystemLoader(
+            str(BASE_DIR / "url_shortener" / "templates")
+        ),
+    )
+
+    views = Views(urls_repo=get_urls_repo(), tr_url=TransUrl())
+
+    app.add_routes(
+        [
+            web.route("*", "/", views.home),
+            web.get("/urls/{url}", views.urls),
+            web.get("/bad_url", views.bad_url),
+        ]
+    )
+
+    setup_error_middleware(app)
+
+    web.run_app(app)
 
 if __name__ == "__main__":
-    web.run_app(app)
+    run()

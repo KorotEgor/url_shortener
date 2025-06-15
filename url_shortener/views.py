@@ -3,14 +3,12 @@ import logging
 from aiohttp import web
 
 from url_shortener.utils.validator import validate_url
-from url_shortener.utils.trans_url import TransUrl
-from url_shortener.db.conn_to_db import get_urls_repo
 
 logger = logging.getLogger(__name__)
 
 
 class Views:
-    def __init__(self, urls_repo=get_urls_repo(), tr_url=TransUrl()):
+    def __init__(self, urls_repo=None, tr_url=None):
         self.urls_repo = urls_repo
         self.tr_url = tr_url
 

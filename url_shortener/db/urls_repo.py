@@ -4,6 +4,7 @@ from sqlite3 import DatabaseError
 logger = logging.getLogger(__name__)
 
 
+# aiosqlite
 class UrlsRepo:
     def __init__(self, db):
         self.db = db
