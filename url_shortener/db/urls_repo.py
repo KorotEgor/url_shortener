@@ -11,11 +11,11 @@ class UrlsRepo:
 
     async def compare_urls(self, user_url, short_url):
         try:
-            self.db.execute(
+            await self.db.execute(
                 "INSERT INTO urls (user_url, short_url) VALUES (?, ?)",
                 (user_url, short_url),
             )
-            self.db.commit()
+            await self.db.commit()
         except DatabaseError as err:
             logger.error(f"Error while comparing urls: {err}")
             return False
@@ -25,11 +25,11 @@ class UrlsRepo:
 
     async def get_user_by_short(self, short_url):
         try:
-            cur = self.db.execute(
+            cur = await self.db.execute(
                 "SELECT user_url FROM urls WHERE short_url = ?",
                 (short_url,),
             )
-            user_url = cur.fetchone()
+            user_url = await cur.fetchone()
         except DatabaseError as err:
             logger.error(f"Error while getting user_url by short_url: {err}")
             return None
@@ -42,11 +42,11 @@ class UrlsRepo:
 
     async def get_short_by_user(self, user_url):
         try:
-            cur = self.db.execute(
+            cur = await self.db.execute(
                 "SELECT short_url FROM urls WHERE user_url = ?",
                 (user_url,),
             )
-            short_url = cur.fetchone()
+            short_url = await cur.fetchone()
         except DatabaseError as err:
             logger.error(f"Error while getting short_url by user_url: {err}")
             return None

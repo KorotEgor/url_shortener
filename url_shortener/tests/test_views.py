@@ -89,3 +89,8 @@ async def test_bad_url(cli):
     with open("url_shortener/tests/fixtures/error_pages/bad_url_resp.html", "rb") as f:
         text = await resp.read()
         assert text == f.read()
+
+
+# async def test_urls(cli):
+#     resp = await cli.get("/urls/user_url")
+#     print(resp)
