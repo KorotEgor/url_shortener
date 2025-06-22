@@ -51,7 +51,6 @@ class Views:
 
         return {}
 
-    @aiohttp_jinja2.template("urls.html")
     async def urls(self, request):
         short_url = "http://localhost:8080/urls/" + request.match_info.get(
             "url", "bad_url"

@@ -56,3 +56,19 @@ class UrlsRepo:
             logger.info(f"Found short_url {short_url} by user_url {user_url}")
 
         return short_url
+
+    async def get_last_short_url(self):
+        try:
+            cur = await self.db.execute(
+                "SELECT short_url FROM urls ORDER BY id DESC LIMIT 1"
+            )
+            short_url = await cur.fetchone()
+        except DatabaseError as err:
+            logger.error(f"Error while getting last short_url: {err}")
+            return None
+
+        if short_url is not None:
+            short_url = short_url[0]
+            logger.info(f"Found last short_url {short_url}")
+
+        return short_url

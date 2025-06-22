@@ -99,8 +99,3 @@ async def test_bad_url(cli):
     ) as f:
         text = await resp.read()
         assert text == f.read()
-
-
-# async def test_urls(cli):
-#     resp = await cli.get("/urls/user_url")
-#     print(resp)
