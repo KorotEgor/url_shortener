@@ -94,8 +94,6 @@ async def test_home(cli):
 async def test_bad_url(cli):
     resp = await cli.get("/bad_url")
     assert resp.status == 200
-    with open(
-        "url_shortener/tests/fixtures/error_pages/bad_url_resp.html", "rb"
-    ) as f:
+    with open("url_shortener/tests/fixtures/bad_url_resp.html", "rb") as f:
         text = await resp.read()
         assert text == f.read()

@@ -44,7 +44,11 @@ async def get_app_and_con():
     return app, con
 
 
-if __name__ == "__main__":
+def run():
     app, con = asyncio.run(get_app_and_con())
     web.run_app(app)
     asyncio.run(con.close())
+
+
+if __name__ == "__main__":
+    run()
