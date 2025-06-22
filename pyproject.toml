@@ -30,6 +30,10 @@ addopts = "--cov-report=term-missing --setup-show --verbose"
 
 [tool.coverage.run]
 branch = true
+omit = [
+    "url_shortener/main.py",
+    "url_shortener/settings.py",
+]
 
 [tool.coverage.report]
 exclude_lines = ["if __name__ == .__main__.:"]
