@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 # app engine
-async def main():
+async def get_app_and_con():
     app = web.Application()
     aiohttp_jinja2.setup(
         app,
@@ -39,30 +39,10 @@ async def main():
 
     setup_error_middleware(app)
 
-    runner = web.AppRunner(
-            app,
-            handle_signals=False,
-        )
-    await runner.setup()
-    site = web.TCPSite(
-        runner,
-        "localhost",
-        8080,
-    )
-
-    await site.start()
-
-
-    try:
-        await asyncio.Event().wait()
-    except asyncio.CancelledError:
-        await runner.cleanup()
-        await con.close()
-        logger.info("Server stopped")
+    return app, con
 
 
 if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        logger.info("App stopped")
+    app, con = asyncio.run(get_app_and_con())
+    web.run_app(app)
+    asyncio.run(con.close())
