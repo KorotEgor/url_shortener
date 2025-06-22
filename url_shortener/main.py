@@ -40,9 +40,9 @@ async def main():
     setup_error_middleware(app)
 
     runner = web.AppRunner(
-            app,
-            handle_signals=False,
-        )
+        app,
+        handle_signals=False,
+    )
     await runner.setup()
     site = web.TCPSite(
         runner,
@@ -51,7 +51,6 @@ async def main():
     )
 
     await site.start()
-
 
     try:
         await asyncio.Event().wait()

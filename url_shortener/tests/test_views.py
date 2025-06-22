@@ -53,7 +53,9 @@ async def test_home(cli):
 
     resp = await cli.post("/", data={"user_url": "bad_url"})
     assert resp.status == 200
-    with open("url_shortener/tests/fixtures/home_pages/home_bad_url.html", "rb") as f:
+    with open(
+        "url_shortener/tests/fixtures/home_pages/home_bad_url.html", "rb"
+    ) as f:
         text = await resp.read()
         assert text == f.read()
 
@@ -61,7 +63,9 @@ async def test_home(cli):
         "/", data={"user_url": "http://localhost:8080/user_url"}
     )
     assert resp.status == 200
-    with open("url_shortener/tests/fixtures/home_pages/home_url_created.html", "rb") as f:
+    with open(
+        "url_shortener/tests/fixtures/home_pages/home_url_created.html", "rb"
+    ) as f:
         text = await resp.read()
         assert text == f.read()
 
@@ -69,7 +73,9 @@ async def test_home(cli):
         "/", data={"user_url": "http://localhost:8080/user_url"}
     )
     assert resp.status == 200
-    with open("url_shortener/tests/fixtures/home_pages/home_error.html", "rb") as f:
+    with open(
+        "url_shortener/tests/fixtures/home_pages/home_error.html", "rb"
+    ) as f:
         text = await resp.read()
         assert text == f.read()
 
@@ -77,7 +83,9 @@ async def test_home(cli):
         "/", data={"user_url": "http://localhost:8080/user_url"}
     )
     assert resp.status == 200
-    with open("url_shortener/tests/fixtures/home_pages/home_url_created.html", "rb") as f:
+    with open(
+        "url_shortener/tests/fixtures/home_pages/home_url_created.html", "rb"
+    ) as f:
         text = await resp.read()
         print(text.decode("utf8"))
         assert text == f.read()
@@ -86,7 +94,9 @@ async def test_home(cli):
 async def test_bad_url(cli):
     resp = await cli.get("/bad_url")
     assert resp.status == 200
-    with open("url_shortener/tests/fixtures/error_pages/bad_url_resp.html", "rb") as f:
+    with open(
+        "url_shortener/tests/fixtures/error_pages/bad_url_resp.html", "rb"
+    ) as f:
         text = await resp.read()
         assert text == f.read()
 
