@@ -8,7 +8,7 @@ from url_shortener.settings import BASE_DIR
 from url_shortener.middlewares import setup_error_middleware
 from url_shortener.views import Views
 from url_shortener.db.conn_to_db import get_urls_repo, init_db
-from url_shortener.utils.trans_url import TransUrl
+from url_shortener.utils.trans_url import TransUrl, get_last_coomb
 
 
 logging.basicConfig(level=logging.INFO)
@@ -27,7 +27,9 @@ async def get_app_and_con():
     )
 
     con = await init_db()
-    views = Views(urls_repo=get_urls_repo(con), tr_url=TransUrl())
+    urls_repo = get_urls_repo(con)
+    tr_url = TransUrl(await get_last_coomb(urls_repo))
+    views = Views(urls_repo=urls_repo, tr_url=tr_url)
 
     app.add_routes(
         [
