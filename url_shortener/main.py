@@ -1,4 +1,3 @@
-from venv import logger
 from aiohttp import web
 import aiohttp_jinja2
 import jinja2
@@ -13,6 +12,7 @@ from url_shortener.utils.trans_url import TransUrl
 
 
 logging.basicConfig(level=logging.INFO)
+
 logger = logging.getLogger(__name__)
 
 

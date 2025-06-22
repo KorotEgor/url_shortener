@@ -11,17 +11,18 @@ with open(Path(__file__).parent / "data.sql", "rb") as f:
 
 
 @pytest.fixture
-def fake_db():
+async def fake_db():
     _, db_path = tempfile.mkstemp()
 
-    db = init_db(path=db_path)
+    db = await init_db(path=db_path)
 
-    db.executescript(_data_sql)
+    await db.executescript(_data_sql)
 
     yield db
 
     db_path = Path(db_path)
     db_path.unlink()
+    await db.close()
 
 
 async def test_get_short_by_user(fake_db):
@@ -48,6 +49,7 @@ async def test_compare_urls(fake_db):
     )
     assert is_good
 
-    assert fake_db.execute(
+    data = await fake_db.execute(
         "SELECT COUNT(*) FROM urls",
-    ).fetchone() == (2,)
+    )
+    assert await data.fetchone() == (2,)
