@@ -58,11 +58,17 @@ async def test_compare_urls(fake_db):
 async def test_get_last_short_url(fake_db):
     urls_repo = UrlsRepo(fake_db)
 
-    assert await urls_repo.get_last_short_url() == "http://localhost:8080/urls/test"
+    assert (
+        await urls_repo.get_last_short_url()
+        == "http://localhost:8080/urls/test"
+    )
 
     await fake_db.execute(
         "INSERT INTO urls (user_url, short_url) VALUES (?, ?)",
         ("https://test2", "http://localhost:8080/urls/test2"),
     )
 
-    assert await urls_repo.get_last_short_url() == "http://localhost:8080/urls/test2"
+    assert (
+        await urls_repo.get_last_short_url()
+        == "http://localhost:8080/urls/test2"
+    )
