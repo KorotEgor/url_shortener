@@ -33,7 +33,7 @@ branch = true
 omit = [
     "url_shortener/main.py",
     "url_shortener/settings.py",
-    "url_shortener/middlewares.py",
+    # "url_shortener/middlewares.py",
 ]
 
 [tool.coverage.report]
