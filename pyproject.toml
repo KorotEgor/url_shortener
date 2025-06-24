@@ -11,6 +11,10 @@ dependencies = [
     "pydantic>=2.11.5",
 ]
 
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [tool.uv]
 dev-dependencies = [
     "logging>=0.4.9.6",
@@ -33,7 +37,6 @@ branch = true
 omit = [
     "url_shortener/main.py",
     "url_shortener/settings.py",
-    # "url_shortener/middlewares.py",
 ]
 
 [tool.coverage.report]
