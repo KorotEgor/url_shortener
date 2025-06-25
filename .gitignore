@@ -173,6 +173,5 @@ cython_debug/
 
 .ruff_cache
 
-# flask instance
-
-instance/
+# db data
+url_shortener.db
