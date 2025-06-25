@@ -1,4 +1,4 @@
-from url_shortener.utils.trans_url import TransUrl, get_last_coomb
+from url_shortener.app.utils.trans_url import TransUrl, get_last_coomb
 from unittest.mock import AsyncMock
 
 

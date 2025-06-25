@@ -8,7 +8,7 @@ commit_lint:
 	uv run ruff format url_shortener --check && uv run ruff check url_shortener --exit-non-zero-on-fix
 
 run:
-	uv run url_shortener/main.py
+	uv run url_shortener/app/main.py
 
 init_db:
 	uv run python3 /home/kor_egor/url_shortener/url_shortener/db/init_db.py

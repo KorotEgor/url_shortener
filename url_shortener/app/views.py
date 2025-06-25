@@ -2,7 +2,7 @@ import aiohttp_jinja2
 import logging
 from aiohttp import web
 
-from url_shortener.utils.validator import validate_url
+from url_shortener.app.utils.validator import validate_url
 
 logger = logging.getLogger(__name__)
 

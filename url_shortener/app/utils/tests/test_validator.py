@@ -1,4 +1,4 @@
-from url_shortener.utils.validator import validate_url
+from url_shortener.app.utils.validator import validate_url
 
 
 async def test_validate_url():

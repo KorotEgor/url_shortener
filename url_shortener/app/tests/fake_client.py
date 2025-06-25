@@ -6,8 +6,8 @@ from url_shortener.settings import BASE_DIR
 from unittest.mock import AsyncMock
 
 
-from url_shortener.views import Views
-from url_shortener.middlewares import setup_error_middleware
+from url_shortener.app.views import Views
+from url_shortener.app.middlewares import setup_error_middleware
 
 
 async def err_handler(request):
@@ -50,7 +50,7 @@ async def cli(aiohttp_client):
     aiohttp_jinja2.setup(
         app,
         loader=jinja2.FileSystemLoader(
-            str(BASE_DIR / "url_shortener" / "tests" / "fixtures")
+            str(BASE_DIR / "url_shortener" / "app" / "tests" / "fixtures")
         ),
     )
     return await aiohttp_client(app)
