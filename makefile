@@ -17,3 +17,8 @@ test:
 	uv run pytest --cov=url_shortener --asyncio-mode=auto
 
 for_commit: lint test
+
+test_run: test run
+
+docker_run:
+	docker compose up --build
